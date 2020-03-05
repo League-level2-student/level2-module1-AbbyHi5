@@ -1,12 +1,82 @@
 package intro_to_array_lists;
 
-public class GuestBook {
-	// Create a GUI with two buttons. One button reads "Add Name" and the other button reads "View Names". 
-	// When the add name button is clicked, display an input dialog that asks the user to enter a name. Add
-	// that name to an ArrayList. When the "View Names" button is clicked, display a message dialog that displays
-	// all the names added to the list. Format the list as follows:
-	// Guest #1: Bob Banders
-	// Guest #2: Sandy Summers
-	// Guest #3: Greg Ganders
-	// Guest #4: Donny Doners
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class GuestBook implements ActionListener {
+
+	static GuestBook guestbook = new GuestBook();
+	static JFrame frame = new JFrame();
+	static JPanel panel = new JPanel();
+	static JButton add = new JButton("Add guest");
+	static JButton view = new JButton("Veiw guests");
+	String name = "";
+	ArrayList<String> list = new ArrayList<String>();
+	
+	public static void main(String[] args) {
+		
+		frame.setVisible(true);
+		frame.setSize(200,110);
+		panel.add(add);
+		panel.add(view);
+		frame.add(panel);
+		guestbook.run();
+
+		
+	}
+	
+	public void run() {
+		add.addActionListener(this);
+		view.addActionListener(this);
+		
+	}
+
+
+	public void actionPerformed(ActionEvent e) {
+		
+			String button = ((JButton) e.getSource()).getText();
+		
+			if(button.equals("Add guest")) {
+				
+				name = "";
+				name = JOptionPane.showInputDialog("Add guests name:");
+				list.add(name);
+				
+			}
+			else {
+				for (int i = 0; i < list.size(); i++) {
+					
+					System.out.println("Guest #" + (i + 1) + " : " + list.get(i));	
+					
+				}
+			}
+		
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
